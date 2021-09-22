@@ -5,13 +5,21 @@
  */
 package Controlador;
 
+import Modelo.Titular;
+import java.sql.Connection;
+
 /**
  *
  * @author jdros
  */
 public class main {
+     
     
     public static void main(String[] args){
         System.out.print("Funcionaa");
+       
+          
     }
+    
+    
 }

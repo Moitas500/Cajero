@@ -5,6 +5,7 @@
  */
 package cajero;
 
+import Modelo.Titular;
 import Vista.Ventana;
 
 /**
@@ -20,6 +21,8 @@ public class main {
         // TODO code application logic here
         Ventana v = new Ventana();
         v.setVisible(true);
+         Titular t= new Titular("Julie", "Riaño");
+        t.ConsultarTitular(1001114977);
     }
     
 }
