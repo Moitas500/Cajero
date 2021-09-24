@@ -6,6 +6,10 @@
 package Controlador;
 
 import Modelo.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,6 +18,8 @@ import javax.swing.JOptionPane;
  */
 public class Transaccion {
     private Cajero cajero;
+    static Connection con;
+ static Conexion cx;
     
     public Transaccion (){
         cajero = new Cajero(147852369, 100000000.2541);
@@ -129,16 +135,121 @@ public class Transaccion {
             JOptionPane.showMessageDialog(null, "Tarjeta Invalidad","Transacción Cancelada",JOptionPane.ERROR_MESSAGE);
         }
     }
-    private Tarjeta getDatosTarjeta(int numTarjeta){
+    public Tarjeta getDatosTarjeta(int numTarjeta){
         /* Consultar datos en la base de datos
             Si existe retornar el objeto tarjeta si no devolver null
         */
+       
+          try {
+        boolean consultaOK=false;
+        Tarjeta tar=null;
+        cx = new Conexion();
+        con = cx.getConexion();
+        con.setAutoCommit(false);
+        Statement stmt = con.createStatement();
+        PreparedStatement stmt2 = con.prepareStatement("SELECT * FROM cuenta where numCuenta = ?");
+        ResultSet rs = stmt.executeQuery ("SELECT * FROM tarjeta where numTarjeta = " + numTarjeta);
+
+        if (rs.next()==true) {
+           stmt2.setString(1,rs.getString("numCuenta"));
+           ResultSet rs2= stmt2.executeQuery();
+           rs2.next();
+           Cuenta c= new Cuenta(Integer.parseInt(rs2.getString("numCuenta")) , Float.parseFloat(rs2.getString("saldo")), Float.parseFloat(rs2.getString("max_retiro")));
+            
+           Boolean est= (rs.getString("estadoTarjeta").equals("Activo") || rs.getString("estadoTarjeta").equals("activo")); 
+           tar= new Tarjeta(rs2.getString("nombre"),rs2.getString("apellido"),Integer.parseInt(rs.getString("numTarjeta")), Integer.parseInt(rs.getString("pin")),est , c);
+            
+           /* Cuenta c= getDatosCuenta(Integer.parseInt(rs.getString("numCuenta")));
+            Boolean est= (rs.getString("estadoTarjeta").equals("Activo") || rs.getString("estadoTarjeta").equals("activo")); 
+            tar= new Tarjeta(rs2.getString("nombre"),rs.getString("apellido"),Integer.parseInt(rs.getString("numTarjeta")), Integer.parseInt(rs.getString("pin")),est , c);*/
+            System.out.println(tar.getEstadotarjeta());
+            consultaOK= true;
+        }else{
+            consultaOK=false;
+        }
+
+        stmt.close();
+        stmt2.close();
+        con.close();
+
+        return tar;
+    }
+    catch ( Exception e ){
+        System.out.println(e.getMessage());
         return null;
     }
-    private Cuenta getDatosCuenta(int numTarjeta){
+          
+        
+    }
+    public Cuenta getDatosCuenta(int numTarjeta){
         /* Consultar datos en la base de datos
             Si existe retornar el objeto Cuenta si no devolver null
         */
+        
+             /*    try {
+        boolean consultaOK=false;
+        Cuenta c=null;
+        cx = new Conexion();
+        con = cx.getConexion();
+        con.setAutoCommit(false);
+        Statement stmt = con.createStatement();
+        
+        ResultSet rs = stmt.executeQuery ("SELECT * FROM cuenta where numCuenta = " + numCuenta);
+
+        if (rs.next()==true) {
+           
+           c= new Cuenta(Integer.parseInt(rs.getString("numCuenta")) , Float.parseFloat(rs.getString("saldo")), Float.parseFloat(rs.getString("max_retiro")));
+          
+            System.out.println(c.getSaldo());
+            consultaOK= true;
+        }else{
+            consultaOK=false;
+        }
+
+        stmt.close();
+        con.close();
+
+        return c;
+    }
+    catch ( Exception e ){
+        System.out.println(e.getMessage());
         return null;
+    }
+          */
+       try {
+        boolean consultaOK=false;
+        Cuenta c=null;
+        cx = new Conexion();
+        con = cx.getConexion();
+        con.setAutoCommit(false);
+        Statement stmt = con.createStatement();
+        PreparedStatement stmt2 = con.prepareStatement("SELECT * FROM cuenta where numCuenta = ?");
+        ResultSet rs = stmt.executeQuery ("SELECT * FROM tarjeta where numTarjeta = " + numTarjeta);
+
+        if (rs.next()==true) {
+           stmt2.setString(1,rs.getString("numCuenta"));
+           ResultSet rs2= stmt2.executeQuery();
+           rs2.next();
+          c= new Cuenta(Integer.parseInt(rs2.getString("numCuenta")) , Float.parseFloat(rs2.getString("saldo")), Float.parseFloat(rs2.getString("max_retiro")));
+            
+           
+            
+          
+            System.out.println(c.getSaldo());
+            consultaOK= true;
+        }else{
+            consultaOK=false;
+        }
+
+        stmt.close();
+        stmt2.close();
+        con.close();
+
+        return c;
+    }
+    catch ( Exception e ){
+        System.out.println(e.getMessage());
+        return null;
+    }
     }
 }

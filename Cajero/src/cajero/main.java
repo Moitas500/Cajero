@@ -5,6 +5,9 @@
  */
 package cajero;
 
+import Controlador.Transaccion;
+import Modelo.Cuenta;
+import Modelo.Tarjeta;
 import Modelo.Titular;
 import Vista.Ventana;
 
@@ -21,8 +24,9 @@ public class main {
         // TODO code application logic here
         Ventana v = new Ventana();
         v.setVisible(true);
-         Titular t= new Titular("Julie", "Riaño");
-        t.ConsultarTitular(1001114977);
+         Transaccion t= new Transaccion();
+         Cuenta c= t.getDatosCuenta(784596);
+         Tarjeta tar= t.getDatosTarjeta(784596);
     }
     
 }
