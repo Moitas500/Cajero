@@ -5,11 +5,17 @@
  */
 package Modelo;
 
+import Controlador.Conexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
 /**
  *
  * @author jdros
  */
 public class Cuenta {
+    static Connection con;
+    static Conexion cx;
     private int numCuenta;
     private float saldo;
     private float maximoRetiro;
@@ -26,10 +32,38 @@ public class Cuenta {
     public float getSaldo(){
         return saldo;
     }
+
+    public void setSaldo(float saldo) {
+        this.saldo = saldo;
+    }
+    
     public void ingresarDinero(float dinero){
         this.saldo+=dinero;
     }
     public void retirarDinero(float dinero){
         saldo-=dinero;
     }
+     public Boolean ActualizarSaldo(){
+    try
+            {
+           cx = new Conexion();
+           con = cx.getConexion();
+           PreparedStatement stmt = con.prepareStatement("UPDATE cuenta SET saldo = " +
+           this.saldo+ " WHERE (numCuenta = " + this.numCuenta + ")");
+
+            
+
+            stmt.executeUpdate();
+            stmt.close();
+            
+            con.close();
+            return true;
+            }
+            catch ( Exception e )
+            {
+            System.out.println(e.getMessage());
+            return false;
+            }
+   
+   }
 }
