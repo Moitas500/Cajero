@@ -25,7 +25,7 @@ public class Transaccion {
         cajero = new Cajero(147852369, 100000000.2541);
     }
     
-    public void retirarDinero(float cantidad,int numTarjeta){
+    public boolean retirarDinero(float cantidad,int numTarjeta){
         Tarjeta t =getDatosTarjeta(numTarjeta);
         Cuenta c=getDatosCuenta(numTarjeta);
         int pin;
@@ -50,6 +50,7 @@ public class Transaccion {
                                 c.retirarDinero(cantidad);
                                 cajero.retirarDinero(cantidad);
                                 JOptionPane.showConfirmDialog(null, "Transacción realizada correctamente");
+                                return true;
                             }else {
                                 JOptionPane.showMessageDialog(null, "Fondos insuficientes en la cuenta","Transacción Cancelada",JOptionPane.ERROR_MESSAGE);
                             }
@@ -71,8 +72,9 @@ public class Transaccion {
         }else {
             JOptionPane.showMessageDialog(null, "Tarjeta Invalidad","Transacción Cancelada",JOptionPane.ERROR_MESSAGE);
         }
+        return false;
     }
-    public void consignarDinero(float cantidad, int numTarjeta){
+    public boolean consignarDinero(float cantidad, int numTarjeta){
         Tarjeta t =getDatosTarjeta(numTarjeta);
         Cuenta c=getDatosCuenta(numTarjeta);
         int pin;
@@ -93,6 +95,7 @@ public class Transaccion {
                     c.ingresarDinero(cantidad);
                     cajero.consignarDinero(cantidad);
                     JOptionPane.showConfirmDialog(null, "Transacción realizada correctamente");
+                    return true;
                 }else{
                     t.bloquearTarjeta();
                     JOptionPane.showMessageDialog(null, "Demasiados intentos, tarjeta bloqueada","Transacción Cancelada",JOptionPane.ERROR_MESSAGE);
@@ -103,8 +106,9 @@ public class Transaccion {
         }else {
             JOptionPane.showMessageDialog(null, "Tarjeta Invalidad","Transacción Cancelada",JOptionPane.ERROR_MESSAGE);
         }
+        return false;
     }
-    public void consultarSaldo(int numTarjeta){
+    public float consultarSaldo(int numTarjeta){
         Tarjeta t =getDatosTarjeta(numTarjeta);
         Cuenta c=getDatosCuenta(numTarjeta);
         int pin;
@@ -123,7 +127,7 @@ public class Transaccion {
                 }
                 if(contador<3){
                     float saldo =c.getSaldo();
-                    JOptionPane.showConfirmDialog(null, "Su saldo es: $"+Float.toString(saldo));
+                    return saldo;
                 }else{
                     t.bloquearTarjeta();
                     JOptionPane.showMessageDialog(null, "Demasiados intentos, tarjeta bloqueada","Transacción Cancelada",JOptionPane.ERROR_MESSAGE);
@@ -134,6 +138,7 @@ public class Transaccion {
         }else {
             JOptionPane.showMessageDialog(null, "Tarjeta Invalidad","Transacción Cancelada",JOptionPane.ERROR_MESSAGE);
         }
+        return -1; //Si se retorna -1 significa que la transacción falló
     }
     public Tarjeta getDatosTarjeta(int numTarjeta){
         /* Consultar datos en la base de datos
