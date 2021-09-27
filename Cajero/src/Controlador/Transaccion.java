@@ -159,9 +159,7 @@ public class Transaccion {
            Boolean est= (rs.getString("estadoTarjeta").equals("Activo") || rs.getString("estadoTarjeta").equals("activo")); 
            tar= new Tarjeta(rs2.getString("nombre"),rs2.getString("apellido"),Integer.parseInt(rs.getString("numTarjeta")), Integer.parseInt(rs.getString("pin")),est , c);
             
-           /* Cuenta c= getDatosCuenta(Integer.parseInt(rs.getString("numCuenta")));
-            Boolean est= (rs.getString("estadoTarjeta").equals("Activo") || rs.getString("estadoTarjeta").equals("activo")); 
-            tar= new Tarjeta(rs2.getString("nombre"),rs.getString("apellido"),Integer.parseInt(rs.getString("numTarjeta")), Integer.parseInt(rs.getString("pin")),est , c);*/
+           
             System.out.println(tar.getEstadotarjeta());
             consultaOK= true;
         }else{
@@ -182,40 +180,7 @@ public class Transaccion {
         
     }
     public Cuenta getDatosCuenta(int numTarjeta){
-        /* Consultar datos en la base de datos
-            Si existe retornar el objeto Cuenta si no devolver null
-        */
-        
-             /*    try {
-        boolean consultaOK=false;
-        Cuenta c=null;
-        cx = new Conexion();
-        con = cx.getConexion();
-        con.setAutoCommit(false);
-        Statement stmt = con.createStatement();
-        
-        ResultSet rs = stmt.executeQuery ("SELECT * FROM cuenta where numCuenta = " + numCuenta);
-
-        if (rs.next()==true) {
-           
-           c= new Cuenta(Integer.parseInt(rs.getString("numCuenta")) , Float.parseFloat(rs.getString("saldo")), Float.parseFloat(rs.getString("max_retiro")));
-          
-            System.out.println(c.getSaldo());
-            consultaOK= true;
-        }else{
-            consultaOK=false;
-        }
-
-        stmt.close();
-        con.close();
-
-        return c;
-    }
-    catch ( Exception e ){
-        System.out.println(e.getMessage());
-        return null;
-    }
-          */
+     
        try {
         boolean consultaOK=false;
         Cuenta c=null;
@@ -252,4 +217,27 @@ public class Transaccion {
         return null;
     }
     }
+     public Boolean ActualizarSaldo(Cuenta cuenta){
+    try
+            {
+           cx = new Conexion();
+           con = cx.getConexion();
+           PreparedStatement stmt = con.prepareStatement("UPDATE cuenta SET saldo = " +
+           cuenta.getSaldo()+ " WHERE (numCuenta = " + cuenta.getNumCuenta() + ")");
+
+            
+
+            stmt.executeUpdate();
+            stmt.close();
+            
+            con.close();
+            return true;
+            }
+            catch ( Exception e )
+            {
+            System.out.println(e.getMessage());
+            return false;
+            }
+   
+   }
 }

@@ -27,6 +27,7 @@ public class main {
          Transaccion t= new Transaccion();
          Cuenta c= t.getDatosCuenta(784596);
          Tarjeta tar= t.getDatosTarjeta(784596);
+        t.ActualizarSaldo(c);
     }
     
 }

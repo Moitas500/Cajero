@@ -5,11 +5,17 @@
  */
 package Modelo;
 
+import Controlador.Conexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
 /**
  *
  * @author jdros
  */
 public class Cuenta {
+    static Connection con;
+    static Conexion cx;
     private int numCuenta;
     private float saldo;
     private float maximoRetiro;
@@ -26,10 +32,21 @@ public class Cuenta {
     public float getSaldo(){
         return saldo;
     }
+
+    public int getNumCuenta() {
+        return numCuenta;
+    }
+    
+
+    public void setSaldo(float saldo) {
+        this.saldo = saldo;
+    }
+    
     public void ingresarDinero(float dinero){
         this.saldo+=dinero;
     }
     public void retirarDinero(float dinero){
         saldo-=dinero;
     }
+  
 }

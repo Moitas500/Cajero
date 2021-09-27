@@ -15,8 +15,7 @@ import java.sql.Statement;
  * @author jdros
  */
 public class Titular {
-    static Connection con;
- static Conexion cx;
+    
     protected String nombre;
     protected String apellido;
     
@@ -31,7 +30,7 @@ public class Titular {
     protected void cambiarApellido(String apellido){
         this.apellido=apellido;
     }
-     public boolean ConsultarTitular(int IdentificacionABuscar){
+    /* public boolean ConsultarTitular(int IdentificacionABuscar){
 
     try {
         boolean consultaOK=false;
@@ -59,5 +58,5 @@ public class Titular {
         return false;
  }
 
- }
+ }*/
 }
