@@ -33,6 +33,11 @@ public class Cuenta {
         return saldo;
     }
 
+    public int getNumCuenta() {
+        return numCuenta;
+    }
+    
+
     public void setSaldo(float saldo) {
         this.saldo = saldo;
     }
@@ -43,27 +48,5 @@ public class Cuenta {
     public void retirarDinero(float dinero){
         saldo-=dinero;
     }
-     public Boolean ActualizarSaldo(){
-    try
-            {
-           cx = new Conexion();
-           con = cx.getConexion();
-           PreparedStatement stmt = con.prepareStatement("UPDATE cuenta SET saldo = " +
-           this.saldo+ " WHERE (numCuenta = " + this.numCuenta + ")");
-
-            
-
-            stmt.executeUpdate();
-            stmt.close();
-            
-            con.close();
-            return true;
-            }
-            catch ( Exception e )
-            {
-            System.out.println(e.getMessage());
-            return false;
-            }
-   
-   }
+  
 }

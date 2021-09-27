@@ -252,4 +252,27 @@ public class Transaccion {
         return null;
     }
     }
+     public Boolean ActualizarSaldo(Cuenta cuenta){
+    try
+            {
+           cx = new Conexion();
+           con = cx.getConexion();
+           PreparedStatement stmt = con.prepareStatement("UPDATE cuenta SET saldo = " +
+           cuenta.getSaldo()+ " WHERE (numCuenta = " + cuenta.getNumCuenta() + ")");
+
+            
+
+            stmt.executeUpdate();
+            stmt.close();
+            
+            con.close();
+            return true;
+            }
+            catch ( Exception e )
+            {
+            System.out.println(e.getMessage());
+            return false;
+            }
+   
+   }
 }

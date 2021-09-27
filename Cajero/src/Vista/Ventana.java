@@ -167,6 +167,7 @@ public class Ventana extends JFrame implements ActionListener{
         }else if(accion.equals("<-")){
             texto = "";
         }else if(accion.equals("ingTarjeta")){
+            
             VentanaUsuario vUser = new VentanaUsuario();
             vUser.setVisible(true);
             this.dispose();
