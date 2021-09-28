@@ -24,10 +24,6 @@ public class main {
         // TODO code application logic here
         Ventana v = new Ventana();
         v.setVisible(true);
-         Transaccion t= new Transaccion();
-         Cuenta c= t.getDatosCuenta(784596);
-         Tarjeta tar= t.getDatosTarjeta(784596);
-        t.ActualizarSaldo(c);
     }
     
 }

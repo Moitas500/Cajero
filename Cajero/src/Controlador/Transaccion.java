@@ -48,9 +48,14 @@ public class Transaccion {
                         if(!(cantidad>c.getMaximoRetiro())){
                             if(!(cantidad>c.getSaldo())){
                                 c.retirarDinero(cantidad);
-                                cajero.retirarDinero(cantidad);
-                                JOptionPane.showConfirmDialog(null, "Transacción realizada correctamente");
-                                return true;
+                                if(ActualizarSaldo(c)){
+                                    cajero.retirarDinero(cantidad);
+                                    JOptionPane.showConfirmDialog(null, "Transacción realizada correctamente");
+                                    return true;
+                                } else{
+                                    JOptionPane.showMessageDialog(null, "Error al comunicar con la base de datos","Transacción Cancelada",JOptionPane.ERROR_MESSAGE);
+                                }
+                                
                             }else {
                                 JOptionPane.showMessageDialog(null, "Fondos insuficientes en la cuenta","Transacción Cancelada",JOptionPane.ERROR_MESSAGE);
                             }
@@ -93,9 +98,14 @@ public class Transaccion {
                 }
                 if(contador<3){
                     c.ingresarDinero(cantidad);
-                    cajero.consignarDinero(cantidad);
-                    JOptionPane.showConfirmDialog(null, "Transacción realizada correctamente");
-                    return true;
+                    if(ActualizarSaldo(c)){
+                        cajero.consignarDinero(cantidad);
+                        JOptionPane.showConfirmDialog(null, "Transacción realizada correctamente");
+                        return true;
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Error al comunicar con la base de datos","Transacción Cancelada",JOptionPane.ERROR_MESSAGE);
+                    }
+                    
                 }else{
                     t.bloquearTarjeta();
                     JOptionPane.showMessageDialog(null, "Demasiados intentos, tarjeta bloqueada","Transacción Cancelada",JOptionPane.ERROR_MESSAGE);
@@ -140,7 +150,7 @@ public class Transaccion {
         }
         return -1; //Si se retorna -1 significa que la transacción falló
     }
-    public Tarjeta getDatosTarjeta(int numTarjeta){
+    private Tarjeta getDatosTarjeta(int numTarjeta){
         /* Consultar datos en la base de datos
             Si existe retornar el objeto tarjeta si no devolver null
         */
@@ -184,7 +194,7 @@ public class Transaccion {
           
         
     }
-    public Cuenta getDatosCuenta(int numTarjeta){
+    private Cuenta getDatosCuenta(int numTarjeta){
      
        try {
         boolean consultaOK=false;
@@ -222,7 +232,7 @@ public class Transaccion {
         return null;
     }
     }
-     public Boolean ActualizarSaldo(Cuenta cuenta){
+     private Boolean ActualizarSaldo(Cuenta cuenta){
     try
             {
            cx = new Conexion();
