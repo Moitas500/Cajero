@@ -6,9 +6,7 @@
 package cajero;
 
 import Controlador.Transaccion;
-import Modelo.Cuenta;
-import Modelo.Tarjeta;
-import Modelo.Titular;
+import Controlador.Controlador;
 import Vista.Ventana;
 
 /**
@@ -23,7 +21,9 @@ public class main {
     public static void main(String[] args) {
         // TODO code application logic here
         Ventana v = new Ventana();
-        v.setVisible(true);
+        Transaccion t = new Transaccion();
+        Controlador ctrl = new Controlador(v,t);
+        
     }
     
 }

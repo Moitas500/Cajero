@@ -150,7 +150,7 @@ public class Transaccion {
         }
         return -1; //Si se retorna -1 significa que la transacción falló
     }
-    private Tarjeta getDatosTarjeta(int numTarjeta){
+    public Tarjeta getDatosTarjeta(int numTarjeta){
         /* Consultar datos en la base de datos
             Si existe retornar el objeto tarjeta si no devolver null
         */
