@@ -50,7 +50,7 @@ public class Transaccion {
                                 c.retirarDinero(cantidad);
                                 if(ActualizarSaldo(c)){
                                     cajero.retirarDinero(cantidad);
-                                    JOptionPane.showConfirmDialog(null, "Transacción realizada correctamente");
+                                    JOptionPane.showMessageDialog(null, "Transacción realizada correctamente");
                                     return true;
                                 } else{
                                     JOptionPane.showMessageDialog(null, "Error al comunicar con la base de datos","Transacción Cancelada",JOptionPane.ERROR_MESSAGE);
@@ -100,7 +100,7 @@ public class Transaccion {
                     c.ingresarDinero(cantidad);
                     if(ActualizarSaldo(c)){
                         cajero.consignarDinero(cantidad);
-                        JOptionPane.showConfirmDialog(null, "Transacción realizada correctamente");
+                        JOptionPane.showMessageDialog(null, "Transacción realizada correctamente");
                         return true;
                     }else{
                         JOptionPane.showMessageDialog(null, "Error al comunicar con la base de datos","Transacción Cancelada",JOptionPane.ERROR_MESSAGE);

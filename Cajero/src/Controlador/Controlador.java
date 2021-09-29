@@ -19,7 +19,6 @@ import javax.swing.JOptionPane;
 public class Controlador implements ActionListener{
     
     private Ventana vista1;
-    private VentanaUsuario vista2;
     private Transaccion modelo;
     
     private void consignarRetirar(boolean tipo, float dinero, int tarjeta){
@@ -42,20 +41,11 @@ public class Controlador implements ActionListener{
         this.vista1.numero8.addActionListener(this);
         this.vista1.numero7.addActionListener(this);
         this.vista1.numero6.addActionListener(this);
-        this.vista1.numero5.addActionListener(this);
+        this.vista1.numero4.addActionListener(this);
         this.vista1.numero5.addActionListener(this);
         this.vista1.numero3.addActionListener(this);
         this.vista1.numero2.addActionListener(this);
         this.vista1.numero1.addActionListener(this);
-        this.vista2.diezMil.addActionListener(this);
-        this.vista2.veinteMil.addActionListener(this);
-        this.vista2.cincuentaMil.addActionListener(this);
-        this.vista2.cienMil.addActionListener(this);
-        this.vista2.doscientosMil.addActionListener(this);
-        this.vista2.salir.addActionListener(this);
-        this.vista2.consultar.addActionListener(this);
-        this.vista2.retirar.addActionListener(this);
-        this.vista2.consignar.addActionListener(this);
     }
     
     @Override
@@ -109,109 +99,14 @@ public class Controlador implements ActionListener{
                     }
                 }
                 if(validado){
-                    vista2 = new VentanaUsuario();
                     this.vista1.dispose();
-                    vista2.setVisible(true);
-                    vista2.setLocationRelativeTo(null);
+                    VentanaUsuario v = new VentanaUsuario();
+                    Transaccion t = new Transaccion();
+                    Controlador2 ctrl = new Controlador2(v,t,numTarjeta);
                 }else{
                     JOptionPane.showMessageDialog(null, "Se han excedido el numero de intentos", "ERROR", JOptionPane.WARNING_MESSAGE);
                 }
             }
-        }else if(accion.equals("Salir")){
-            this.vista2.dispose();
-            vista1 = new Ventana();
-            vista1.setVisible(true);
-            vista1.setLocationRelativeTo(null);
-        }else if(accion.equals("Consultar")){
-            this.vista2.labelRetirar.setVisible(false);
-            this.vista2.labelConsignar.setVisible(false);
-            this.vista2.veinteMil.setVisible(false);
-            this.vista2.diezMil.setVisible(false);
-            this.vista2.cincuentaMil.setVisible(false);
-            this.vista2.cienMil.setVisible(false);
-            this.vista2.doscientosMil.setVisible(false);
-        }else if(accion.equals("Consignar")){
-            this.vista2.labelRetirar.setVisible(false);
-            this.vista2.labelConsignar.setVisible(true);
-            this.vista2.labelConsignar.setText("¿Cuanto dinero desea consignar?");
-            this.vista2.labelConsignar.setBounds(150, 50, 200, 50);
-            this.vista2.veinteMil.setVisible(true);
-            this.vista2.diezMil.setVisible(true);
-            this.vista2.cincuentaMil.setVisible(true);
-            this.vista2.cienMil.setVisible(true);
-            this.vista2.doscientosMil.setVisible(true);
-            this.vista2.veinteMil.setBounds(320, 200, 150, 50);
-            this.vista2.diezMil.setBounds(50, 200, 150, 50);
-            this.vista2.cincuentaMil.setBounds(50, 300, 150, 50);
-            this.vista2.cienMil.setBounds(320, 300, 150, 50);
-            this.vista2.doscientosMil.setBounds(180, 400, 150, 50);
-            tipo = true;
-        }else if(accion.equals("Retirar")){
-            this.vista2.labelRetirar.setVisible(true);
-            this.vista2.labelConsignar.setVisible(false);
-            this.vista2.labelRetirar.setText("¿Cuanto dinero desea retirar?");
-            this.vista2.labelRetirar.setBounds(150, 50, 200, 50);
-            this.vista2.veinteMil.setVisible(true);
-            this.vista2.diezMil.setVisible(true);
-            this.vista2.cincuentaMil.setVisible(true);
-            this.vista2.cienMil.setVisible(true);
-            this.vista2.doscientosMil.setVisible(true);
-            this.vista2.veinteMil.setBounds(320, 200, 150, 50);
-            this.vista2.diezMil.setBounds(50, 200, 150, 50);
-            this.vista2.cincuentaMil.setBounds(50, 300, 150, 50);
-            this.vista2.cienMil.setBounds(320, 300, 150, 50);
-            this.vista2.doscientosMil.setBounds(180, 400, 150, 50);
-            tipo = false;
-        }else if(accion.equals("diezMil")){
-            this.vista2.labelRetirar.setVisible(false);
-            this.vista2.labelConsignar.setVisible(false);
-            this.vista2.veinteMil.setVisible(false);
-            this.vista2.diezMil.setVisible(false);
-            this.vista2.cincuentaMil.setVisible(false);
-            this.vista2.cienMil.setVisible(false);
-            this.vista2.doscientosMil.setVisible(false);
-            cantidad = 10000;
-            consignarRetirar(tipo,cantidad,numTarjeta);
-        }else if(accion.equals("veinteMil")){
-            this.vista2.labelRetirar.setVisible(false);
-            this.vista2.labelConsignar.setVisible(false);
-            this.vista2.veinteMil.setVisible(false);
-            this.vista2.diezMil.setVisible(false);
-            this.vista2.cincuentaMil.setVisible(false);
-            this.vista2.cienMil.setVisible(false);
-            this.vista2.doscientosMil.setVisible(false);
-            cantidad = 20000;
-            consignarRetirar(tipo,cantidad,numTarjeta);
-        }else if(accion.equals("cincuentaMil")){
-            this.vista2.labelRetirar.setVisible(false);
-            this.vista2.labelConsignar.setVisible(false);
-            this.vista2.veinteMil.setVisible(false);
-            this.vista2.diezMil.setVisible(false);
-            this.vista2.cincuentaMil.setVisible(false);
-            this.vista2.cienMil.setVisible(false);
-            this.vista2.doscientosMil.setVisible(false);
-            cantidad = 50000;
-            consignarRetirar(tipo,cantidad,numTarjeta);
-        }else if(accion.equals("cienMil")){
-            this.vista2.labelRetirar.setVisible(false);
-            this.vista2.labelConsignar.setVisible(false);
-            this.vista2.veinteMil.setVisible(false);
-            this.vista2.diezMil.setVisible(false);
-            this.vista2.cincuentaMil.setVisible(false);
-            this.vista2.cienMil.setVisible(false);
-            this.vista2.doscientosMil.setVisible(false);
-            cantidad = 100000;
-            consignarRetirar(tipo,cantidad,numTarjeta);
-        }else if(accion.equals("doscientosMil")){
-            this.vista2.labelRetirar.setVisible(false);
-            this.vista2.labelConsignar.setVisible(false);
-            this.vista2.veinteMil.setVisible(false);
-            this.vista2.diezMil.setVisible(false);
-            this.vista2.cincuentaMil.setVisible(false);
-            this.vista2.cienMil.setVisible(false);
-            this.vista2.doscientosMil.setVisible(false);
-            cantidad = 200000;
-            consignarRetirar(tipo,cantidad,numTarjeta);
         }
         this.vista1.numTarjeta.setText(texto);
         this.vista1.numTarjeta.setEditable(false);

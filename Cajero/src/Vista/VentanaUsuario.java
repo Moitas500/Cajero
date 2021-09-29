@@ -27,6 +27,8 @@ public class VentanaUsuario extends JFrame{
     public JLabel imagen;
     public JLabel labelConsignar;
     public JLabel labelRetirar;
+    public JLabel labelNombreUsuario;
+    public JLabel labelSaldo;
     public ImageIcon image;
     public Icon icono;
     public JButton consultar;
@@ -66,6 +68,8 @@ public class VentanaUsuario extends JFrame{
         imagen = new JLabel();
         labelConsignar = new JLabel();
         labelRetirar = new JLabel();
+        labelSaldo = new JLabel();
+        labelNombreUsuario = new JLabel();
         imagen.setBounds(30, 10, 200, 200);
         image = new ImageIcon("Davivienda.jpg");
         icono = new ImageIcon(image.getImage().getScaledInstance(imagen.getWidth(), imagen.getHeight(), Image.SCALE_DEFAULT));
@@ -119,5 +123,7 @@ public class VentanaUsuario extends JFrame{
         panelUser.add(cincuentaMil);
         panelUser.add(labelConsignar);
         panelUser.add(labelRetirar);
+        panelUser.add(labelNombreUsuario);
+        panelUser.add(labelSaldo);
     }
 }
