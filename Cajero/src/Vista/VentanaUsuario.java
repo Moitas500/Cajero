@@ -87,9 +87,9 @@ public class VentanaUsuario extends JFrame{
         doscientosMil = new JButton("200.000");
         diezMil.setActionCommand("diezMil");
         diezMil.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
-        veinteMil.setActionCommand("diezMil");
+        veinteMil.setActionCommand("veinteMil");
         veinteMil.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
-        cincuentaMil.setActionCommand("veinteMil");
+        cincuentaMil.setActionCommand("cincuentaMil");
         cincuentaMil.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
         cienMil.setActionCommand("cienMil");
         cienMil.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));

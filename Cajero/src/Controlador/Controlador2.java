@@ -8,6 +8,7 @@ package Controlador;
 import Modelo.Tarjeta;
 import Vista.Ventana;
 import Vista.VentanaUsuario;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
@@ -21,8 +22,10 @@ public class Controlador2 implements ActionListener{
     private Transaccion modelo;
     private int numTarjeta;
     private String tipo;
+    private float cantidad;
     
     private void consignarRetirar(String tipo, float dinero, int tarjeta){
+        System.out.println(dinero + " este es");
         if(tipo.equals("Consignar")){
             modelo.consignarDinero(dinero, tarjeta);
         }else{
@@ -38,6 +41,8 @@ public class Controlador2 implements ActionListener{
         this.vista2.labelNombreUsuario.setBounds(50, 50, 220, 20);
         this.vista2.labelSaldo.setText(Float.toString(modelo.consultarSaldo(numTarjeta)));
         this.vista2.labelNombreUsuario.setBounds(50, 100, 220, 20);
+        this.vista2.labelSaldo.setFont(new Font("serif",Font.BOLD,32));
+        this.vista2.labelSaldo.setBounds(200,200,220,50);
         this.vista2.diezMil.addActionListener(this);
         this.vista2.veinteMil.addActionListener(this);
         this.vista2.cincuentaMil.addActionListener(this);
@@ -54,13 +59,14 @@ public class Controlador2 implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent ae) {
         String accion = ae.getActionCommand();
-        float cantidad;
+        cantidad = 0;
         if(accion.equals("Salir")){
             this.vista2.dispose();
             Ventana v = new Ventana();
             Transaccion t = new Transaccion();
             Controlador ctrl = new Controlador(v,t);
         }else if(accion.equals("Consultar")){
+            this.vista2.labelSaldo.setText(Float.toString(modelo.consultarSaldo(numTarjeta)));
             this.vista2.labelNombreUsuario.setVisible(true);
             this.vista2.labelSaldo.setVisible(true);
             this.vista2.labelRetirar.setVisible(false);
