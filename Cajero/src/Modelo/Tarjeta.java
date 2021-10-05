@@ -27,6 +27,11 @@ public class Tarjeta extends Titular{
    {
        return pin;
    }
+
+    public int getNumTarjeta() {
+        return numTarjeta;
+    }
+   
    public void cambiarPin(int pin){
        this.pin=pin;
    }

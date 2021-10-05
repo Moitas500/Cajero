@@ -86,7 +86,7 @@ public class Controlador implements ActionListener{
             if(tarjetaPrueba == null){
                 JOptionPane.showMessageDialog(null, "La tarjeta ingresada no existe", "ERROR", JOptionPane.WARNING_MESSAGE);
             }else{
-                int contador = 0;
+               /* int contador = 0;
                 boolean validado = false;
                 while(contador < 3){
                     String pin = JOptionPane.showInputDialog("Escriba el pin de la cuenta");
@@ -105,7 +105,14 @@ public class Controlador implements ActionListener{
                     Controlador2 ctrl = new Controlador2(v,t,numTarjeta);
                 }else{
                     JOptionPane.showMessageDialog(null, "Se han excedido el numero de intentos", "ERROR", JOptionPane.WARNING_MESSAGE);
-                }
+                    Transaccion t = new Transaccion();
+                    tarjetaPrueba.bloquearTarjeta();
+                    t.ActualizarTarjeta(tarjetaPrueba);
+                }*/
+               this.vista1.dispose();
+                    VentanaUsuario v = new VentanaUsuario();
+                    Transaccion t = new Transaccion();
+                    Controlador2 ctrl = new Controlador2(v,t,numTarjeta);
             }
         }
         this.vista1.numTarjeta.setText(texto);

@@ -69,6 +69,7 @@ public class Transaccion {
                 else
                 {
                     t.bloquearTarjeta();
+                    ActualizarTarjeta(t);
                     JOptionPane.showMessageDialog(null, "Demasiados intentos, tarjeta bloqueada","Transacción Cancelada",JOptionPane.ERROR_MESSAGE);
                 }
             } else {
@@ -108,6 +109,7 @@ public class Transaccion {
                     
                 }else{
                     t.bloquearTarjeta();
+                    ActualizarTarjeta(t);
                     JOptionPane.showMessageDialog(null, "Demasiados intentos, tarjeta bloqueada","Transacción Cancelada",JOptionPane.ERROR_MESSAGE);
                 }
             } else {
@@ -140,6 +142,7 @@ public class Transaccion {
                     return saldo;
                 }else{
                     t.bloquearTarjeta();
+                    ActualizarTarjeta(t);
                     JOptionPane.showMessageDialog(null, "Demasiados intentos, tarjeta bloqueada","Transacción Cancelada",JOptionPane.ERROR_MESSAGE);
                 }
             } else {
@@ -255,4 +258,29 @@ public class Transaccion {
             }
    
    }
+      public Boolean ActualizarTarjeta(Tarjeta tarjeta){
+    try
+            {
+           cx = new Conexion();
+           con = cx.getConexion();
+           PreparedStatement stmt = con.prepareStatement("UPDATE tarjeta SET pin = " +
+           tarjeta.getPin()+ ", estadoTarjeta = " +
+           tarjeta.getEstadotarjeta()+" WHERE (numTarjeta = " + tarjeta.getNumTarjeta()+ ")");
+
+            
+
+            stmt.executeUpdate();
+            stmt.close();
+            
+            con.close();
+            return true;
+            }
+            catch ( Exception e )
+            {
+            System.out.println(e.getMessage());
+            return false;
+            }
+   
+   }
+ 
 }
