@@ -109,10 +109,14 @@ public class Controlador implements ActionListener{
                     tarjetaPrueba.bloquearTarjeta();
                     t.ActualizarTarjeta(tarjetaPrueba);
                 }*/
-               this.vista1.dispose();
+                if(tarjetaPrueba.getEstadotarjeta()){
+                    this.vista1.dispose();
                     VentanaUsuario v = new VentanaUsuario();
                     Transaccion t = new Transaccion();
                     Controlador2 ctrl = new Controlador2(v,t,numTarjeta);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Tarjeta bloqueada", "ERROR", JOptionPane.WARNING_MESSAGE);
+                }
             }
         }
         this.vista1.numTarjeta.setText(texto);

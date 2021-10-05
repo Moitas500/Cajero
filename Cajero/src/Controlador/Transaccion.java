@@ -71,6 +71,7 @@ public class Transaccion {
                     t.bloquearTarjeta();
                     ActualizarTarjeta(t);
                     JOptionPane.showMessageDialog(null, "Demasiados intentos, tarjeta bloqueada","Transacción Cancelada",JOptionPane.ERROR_MESSAGE);
+                    System.exit(0);
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Cuenta no encontrada","Transacción Cancelada",JOptionPane.ERROR_MESSAGE);
@@ -111,6 +112,7 @@ public class Transaccion {
                     t.bloquearTarjeta();
                     ActualizarTarjeta(t);
                     JOptionPane.showMessageDialog(null, "Demasiados intentos, tarjeta bloqueada","Transacción Cancelada",JOptionPane.ERROR_MESSAGE);
+                    System.exit(0);
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Cuenta no encontrada","Transacción Cancelada",JOptionPane.ERROR_MESSAGE);
@@ -144,6 +146,7 @@ public class Transaccion {
                     t.bloquearTarjeta();
                     ActualizarTarjeta(t);
                     JOptionPane.showMessageDialog(null, "Demasiados intentos, tarjeta bloqueada","Transacción Cancelada",JOptionPane.ERROR_MESSAGE);
+                    System.exit(0);
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Cuenta no encontrada","Transacción Cancelada",JOptionPane.ERROR_MESSAGE);
